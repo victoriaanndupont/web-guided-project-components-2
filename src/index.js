@@ -83,18 +83,23 @@ function dogCardMaker({ imageURL, breed }) {
 //     debugger;
 //   });
 
-axios.get(`https://dog.ceo/api/breed/boxer/images/random/12`).then((res) => {
-  const images = res.data.message;
-  // loop over the array of images
-  images.forEach((image) => {
-    // create dog card
-    const newDogCard = dogCardMaker({ imageURL: image, breed: "boxer" });
-    // console log done
-    console.log("done");
-    // append to entry point
-    entryPoint.appendChild(newDogCard);
+axios
+  .get(`https://dog.ceo/api/breed/boxer/images/random/12`)
+  .then((res) => {
+    const images = res.data.message;
+    // loop over the array of images
+    images.forEach((image) => {
+      // create dog card
+      const newDogCard = dogCardMaker({ imageURL: image, breed: "boxer" });
+      // console log done
+      console.log("done");
+      // append to entry point
+      entryPoint.appendChild(newDogCard);
+    });
+  })
+  .catch((err) => {
+    debugger;
   });
-});
 
 // 👉 (OPTIONAL) TASK 6- Wrap the fetching operation inside a function `getDogs`
 // that takes a breed and a count (of dogs)

@@ -2,6 +2,7 @@
 // We never nest imports inside blocks of code!
 import axios from "axios";
 console.log(axios);
+const result = axios.get();
 
 // 👉 TASK 1- Test out the following endpoints:
 

@@ -5,6 +5,7 @@ console.log(axios);
 const result = axios.get("https://lambda-times-api.herokuapp.com/friends");
 console.log(result);
 
+// PREDICTION TIME: in what order will these print to the console?
 console.log("1. about to fetch data with axios");
 
 result.then((futureData) => {

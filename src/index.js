@@ -75,7 +75,7 @@ function dogCardMaker({ imageURL, breed }) {
 axios
   .get(`https://dog.ceo/api/breed/retriever/images/random/6`)
   .then((res) => {
-    debugger;
+    console.log(res);
   })
   .catch((err) => {
     debugger;

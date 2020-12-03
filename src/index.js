@@ -76,7 +76,8 @@ axios
   .get(`https://dog.ceo/api/breed/retriever/images/random/6`)
   .then((res) => {
     console.log(res.data.message);
-    images = res.data.message;
+    const images = res.data.message;
+    console.log("images", images);
   })
   .catch((err) => {
     debugger;

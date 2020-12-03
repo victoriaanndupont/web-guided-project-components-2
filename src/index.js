@@ -72,6 +72,14 @@ function dogCardMaker({ imageURL, breed }) {
 //    * ON FAILURE: log the error to the console
 //    * IN ANY CASE: log "done" to the console
 
+axios
+  .get(`https://dog.ceo/api/breed/retriever/images/random/5`)
+  .then((res) => {
+    debugger;
+  })
+  .catch((err) => {
+    debugger;
+  });
 // 👉 (OPTIONAL) TASK 6- Wrap the fetching operation inside a function `getDogs`
 // that takes a breed and a count (of dogs)
 

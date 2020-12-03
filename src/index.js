@@ -22,6 +22,11 @@ axios
 
 console.log("3. we requested the data with axios");
 
+// 1. Pending - neither fulfilled or rejected
+// 2. Fulfilled - we have some data (200! Success!)
+// 3. Rejected - ie 404
+// 4. Settled - either fulfilled or rejected
+
 // 👉 TASK 1- Test out the following endpoints:
 
 //  https://lambda-times-api.herokuapp.com/friends

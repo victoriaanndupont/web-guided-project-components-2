@@ -72,16 +72,29 @@ function dogCardMaker({ imageURL, breed }) {
 //    * ON FAILURE: log the error to the console
 //    * IN ANY CASE: log "done" to the console
 
-axios
-  .get(`https://dog.ceo/api/breed/retriever/images/random/6`)
-  .then((res) => {
-    console.log(res.data.message);
-    const images = res.data.message;
-    console.log(images);
-  })
-  .catch((err) => {
-    debugger;
+// axios
+//   .get(`https://dog.ceo/api/breed/retriever/images/random/6`)
+//   .then((res) => {
+//     console.log(res.data.message);
+//     const images = res.data.message;
+//     console.log(images);
+//   })
+//   .catch((err) => {
+//     debugger;
+//   });
+
+axios.get(`https://dog.ceo/api/breed/boxer/images/random/12`).then((res) => {
+  const images = res.data.message;
+  // loop over the array of images
+  images.forEach((image) => {
+    // create dog card
+    const newDogCard = dogCardMaker({ imageURL: image, breed: "boxer" });
+    // console log done
+    console.log("done");
+    // append to entry point
+    entryPoint.appendChild(newDogCard);
   });
+});
 
 // 👉 (OPTIONAL) TASK 6- Wrap the fetching operation inside a function `getDogs`
 // that takes a breed and a count (of dogs)

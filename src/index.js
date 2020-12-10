@@ -1,6 +1,9 @@
 // Imports at the top of the file!
 // We never nest imports inside blocks of code!
 
+import axios from 'axios'
+// import { breeds } from './breeds'
+
 
 // 👉 TASK 1- Test out the following endpoints:
 
@@ -19,7 +22,8 @@
 
 // 👉 TASK 2- Select the "entry point", the element
 // inside of which we'll inject our dog cards 
-const entryPoint = null
+const entryPoint = document.querySelector('div.entry')
+
 
 
 // 👉 TASK 3- `dogCardMaker` takes an object and returns a Dog Card.
@@ -57,9 +61,56 @@ function dogCardMaker({ imageURL, breed }) {
 //    * IN ANY CASE: log "done" to the console
 
 
+
+
+
 // 👉 (OPTIONAL) TASK 6- Wrap the fetching operation inside a function `getDogs`
 // that takes a breed and a count (of dogs)
 
+function getDogs() {
+  /* axios example */
+  // axios.get('https://lambda-times-api.herokuapp.com/breeds')
+  // .then(({data: breeds}) => {
+  //   breeds.forEach(breed => {
+  //     axios.get(`https://dog.ceo/api/breed/${breed}/images/random`)
+  //     .then(({data}) => {
+  //       const imageURL = data.message
+  //       const card = dogCardMaker({imageURL, breed})
+    
+  //       entryPoint.appendChild(card)
+    
+  //       console.log(card)
+  //     })
+  //     .catch(err => console.log(err))
+  //   })
+  // })
+  // .catch(err => console.log(err))
+
+  fetch('https://lambda-times-api.herokuapp.com/breeds')
+  .then(response => response.json())
+  .then(result => {
+    result.forEach(breed => {
+      fetch(`https://dog.ceo/api/breed/${breed}/images/random`)
+      .then(response => response.json())
+      .then(data => {
+        const imageURL = data.message
+        const card = dogCardMaker({imageURL, breed})
+    
+        entryPoint.appendChild(card)
+      })
+    });
+  })
+  .catch(err => console.log(err))
+}
+
+const button = document.createElement('button')
+button.textContent = 'Get some doggies'
+
+const container = document.querySelector('div.container')
+
+button.addEventListener('click', getDogs)
+
+container.insertBefore(button, container.children[1])
 
 // 👉 (OPTIONAL) TASK 7- Put a button in index.html to 'get dogs' and add a click
 // event listener that executes `getDogs`

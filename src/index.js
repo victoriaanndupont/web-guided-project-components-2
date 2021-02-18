@@ -1,7 +1,21 @@
 // Imports at the top of the file!
 // We never nest imports inside blocks of code!
+// function fakeRequest(arg){
+//   return new Promise((resolve,reject) => {
+//     if (arg ===true) {
+      
+    
+//     return resolve({ success, true, data: {foo: "bar"}})}
+//     else{return reject({success: false, error:"bad juju"})
+//   }
+//   })
+// }
 
-
+// fakeRequest()
+// .then(data =>{
+//   console.log(data)
+// })
+// .catch(err => console.log(err))
 // 👉 TASK 1- Test out the following endpoints:
 
 //  https://lambda-times-api.herokuapp.com/friends
@@ -19,7 +33,7 @@
 
 // 👉 TASK 2- Select the "entry point", the element
 // inside of which we'll inject our dog cards 
-const entryPoint = null
+const entryPoint = document.querySelector('div.entry')
 
 
 // 👉 TASK 3- `dogCardMaker` takes an object and returns a Dog Card.
@@ -44,11 +58,12 @@ function dogCardMaker({ imageURL, breed }) {
   // never forget to return!
   return dogCard
 }
-
+entryPoint.appendChild(dogCardMaker({ imageURL: 'url/breed'}))
 
 // 👉 TASK 4- Bring the Axios library into the project using one of two methods:
 //    * Traditional way: put another script tag inside index.html (`https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js`)
 //    * Projects with npm: install it with npm and import it into this file
+
 
 
 // 👉 TASK 5- Fetch dogs from `https://dog.ceo/api/breed/{breed}/images/random/{number}`
@@ -56,15 +71,42 @@ function dogCardMaker({ imageURL, breed }) {
 //    * ON FAILURE: log the error to the console
 //    * IN ANY CASE: log "done" to the console
 
+axios.get(URLPic) // This is a Promise
+
+.then(data => {
+  //{... data: {messages:['url'] } }
+  //
+  console.log(data.data.message[0])
+  const imageURL = data.message[0]
+  entryPoint.appendChild(dogCardMaker({imageURL, breed: 'Dachsund'}))
+})
+
+
+// console.log(axios.get(URLPic))
+
 
 // 👉 (OPTIONAL) TASK 6- Wrap the fetching operation inside a function `getDogs`
-// that takes a breed and a count (of dogs)
+// that takes a breed and a count (of dogs)\
 
-
+const getDogs = (breed, count)
+axios.get('url')
+.then(({data}) =>{
+  const imageURL = data.message[0]
+ const dogCard = dogCardMaker({imageURL, breed})
+ entryPoint.appendChild(dogCard)
+})
+.catch(err => console.log(err))
 // 👉 (OPTIONAL) TASK 7- Put a button in index.html to 'get dogs' and add a click
 // event listener that executes `getDogs`
-
-
+const dogButton = document.querySelector('button-dog-btn')
+dogButton.onclick = () => console.log('yolo!!')
+axios.get('lambda-times-api.herokuapp.com/breeds')
+.then(({data})=>{
+  const breeeds = data
+  breeeds.forEach(breed => {
+    getDogs(breed, 1)
+  })
+})
 // 👉 (OPTIONAL) TASK 8- Import the breeds from `breeds.js`
 // or request them from https://lambda-times-api.herokuapp.com/breeds
 // and loop over them, fetching a dog at each iteration
